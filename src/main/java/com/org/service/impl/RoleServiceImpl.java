@@ -50,18 +50,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
         baseMapper.dropRoleUsers(role.getId());
     }
 
-    @Transactional(readOnly = false, rollbackFor = Exception.class)
-    @Override
-    public void saveRoleMenus(Long id, Set<Menu> menuSet) {
-        baseMapper.saveRoleMenus(id,menuSet);
-    }
-
-    @Transactional(readOnly = false, rollbackFor = Exception.class)
-    @Override
-    public void dropRoleMenus(Long id) {
-        baseMapper.dropRoleMenus(id);
-    }
-
     @Override
     public Integer getRoleNameCount(String name) {
         EntityWrapper<Role> wrapper = new EntityWrapper<>();

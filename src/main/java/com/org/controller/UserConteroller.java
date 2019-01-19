@@ -3,16 +3,12 @@ package com.org.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.org.annotation.SysLog;
-import com.org.base.MySysUser;
 import com.org.entity.Role;
 import com.org.entity.User;
 import com.org.service.MenuService;
 import com.org.service.RoleService;
 import com.org.service.UserService;
-import com.org.utils.Constants;
-import com.org.utils.LayerData;
-import com.org.utils.RestResponse;
-import com.org.utils.ToolUtil;
+import com.org.utils.*;
 import com.org.vo.ShowMenu;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -220,7 +216,7 @@ public class UserConteroller {
     @GetMapping("getUserMenu")
     @ResponseBody
     public List<ShowMenu> getUserMenu(){
-        Long userId = MySysUser.id();
+        Long userId = ShiroUtils.id();
         List<ShowMenu> list = menuService.getShowMenuByUser(userId);
         return list;
     }
@@ -280,7 +276,7 @@ public class UserConteroller {
         if(!confirmPwd.equals(newPwd)){
             return RestResponse.failure("确认密码与新密码不一致");
         }
-        User user = userService.findUserById(MySysUser.id());
+        User user = userService.findUserById(ShiroUtils.id());
 
         //旧密码不能为空
         String pw = ToolUtil.entryptPassword(oldPwd,user.getSalt()).split(",")[0];

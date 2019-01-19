@@ -18,7 +18,6 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.FetchRet;
 import com.qiniu.util.Auth;
 import com.xiaoleilu.hutool.util.RandomUtil;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -219,27 +218,6 @@ public class QiniuUploadServiceImpl implements UploadService {
             rescource.insert();
         }
         return filePath;
-    }
-
-    @Override
-    public String uploadBase64(String base64) {
-        StringBuffer key = new StringBuffer();
-        StringBuffer returnUrl = new StringBuffer(getUploadInfo().getQiniuBasePath());
-        String qiniuDir = getUploadInfo().getQiniuDir();
-        String fileName = RandomUtil.randomUUID(),filePath;
-        if(StringUtils.isNotBlank(qiniuDir)){
-            key.append(qiniuDir).append("/");
-            returnUrl.append(qiniuDir).append("/");
-        }
-        key.append(fileName);
-        returnUrl.append(fileName);
-        byte[] data = Base64.decodeBase64(base64);
-        try {
-            getUploadManager().put(data,key.toString(),getAuth());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return returnUrl.toString();
     }
 
     @Override

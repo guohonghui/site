@@ -20,10 +20,6 @@ public interface RoleService extends IService<Role> {
 
     void deleteRole(Role role);
 
-    void saveRoleMenus(Long id, Set<Menu> menuSet);
-
-    void dropRoleMenus(Long id);
-
     Integer getRoleNameCount(String name);
 
     List<Role> selectAll();

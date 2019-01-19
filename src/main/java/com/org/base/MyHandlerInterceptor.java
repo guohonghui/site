@@ -3,6 +3,7 @@ package com.org.base;
 import com.org.entity.User;
 import com.org.service.SiteService;
 import com.org.service.UserService;
+import com.org.utils.ShiroUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,10 +34,10 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
             userService = (UserService) factory.getBean("userService");
 
         }
-        httpServletRequest.setAttribute("site",siteService.getCurrentSite());
-        User user = userService.findUserById(MySysUser.id());
-        if(user != null){
-            httpServletRequest.setAttribute("currentUser",user);
+        httpServletRequest.setAttribute("site", siteService.getCurrentSite());
+        User user = userService.findUserById(ShiroUtils.id());
+        if (user != null) {
+            httpServletRequest.setAttribute("currentUser", user);
             return true;
         }
         return false;

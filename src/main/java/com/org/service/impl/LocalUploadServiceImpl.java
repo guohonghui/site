@@ -179,45 +179,6 @@ public class LocalUploadServiceImpl implements UploadService {
     }
 
     @Override
-    public String uploadBase64(String base64) {
-        StringBuffer webUrl=new StringBuffer("/static/upload/");
-        BASE64Decoder decoder = new BASE64Decoder();
-        try
-        {
-            //Base64解码
-            byte[] b = decoder.decodeBuffer(base64);
-            for(int i=0;i<b.length;++i)
-            {
-                if(b[i]<0)
-                {//调整异常数据
-                    b[i]+=256;
-                }
-            }
-            //生成jpeg图片
-            StringBuffer ss = new StringBuffer(ResourceUtils.getURL("classpath:").getPath());
-            String filePath = ss.append("static/upload/").toString();
-            File targetFileDir = new File(filePath);
-            if(!targetFileDir.exists()){
-                targetFileDir.mkdirs();
-            }
-            StringBuffer sb = new StringBuffer(filePath);
-            StringBuffer fileName = new StringBuffer(RandomUtil.randomUUID());
-            sb.append(fileName);
-            sb.append(".jpg");
-            String imgFilePath = sb.toString();//新生成的图片
-            OutputStream out = new FileOutputStream(imgFilePath);
-            out.write(b);
-            out.flush();
-            out.close();
-            return webUrl.append(sb).toString();
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
-    }
-
-    @Override
     public Boolean testAccess(UploadInfo uploadInfo) {
         return null;
     }

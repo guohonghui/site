@@ -21,13 +21,11 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.UUID;
 
 @Service("ossService")
@@ -213,44 +211,6 @@ public class OssUploadServiceImpl implements UploadService {
         rescource.insert();
         getOSSClient().shutdown();
         return null;
-    }
-
-    @Override
-    public String uploadBase64(String base64) {
-        //base64数据转换为byte[]类型
-        byte[] asBytes = Base64.getDecoder().decode(base64);
-        InputStream sbs = new ByteArrayInputStream(asBytes);
-        StringBuffer returnUrl = new StringBuffer(getUploadInfo().getOssBasePath());
-        StringBuffer key = new StringBuffer();
-        StringBuffer fileName = new StringBuffer(RandomUtil.randomUUID());
-        String ossDir = getUploadInfo().getOssDir();
-        int fileSize = asBytes.length;
-        //创建上传Object的Metadata
-        try {
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentLength(sbs.available());
-            metadata.setContentEncoding("utf-8");
-            metadata.setContentType("image/png");
-            metadata.setContentDisposition("filename/filesize=" + fileName + "/" + fileSize + "Byte.");
-            //上传文件
-            if(ossDir != null && !"".equals(ossDir)){
-                key.append(ossDir).append("/");
-                returnUrl.append(ossDir).append("/");
-            }
-            key.append(fileName);
-            PutObjectResult putResult = getOSSClient().putObject(getUploadInfo().getOssBucketName(), key.toString(), sbs, metadata);
-            returnUrl.append(fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                sbs.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            getOSSClient().shutdown();
-        }
-        return returnUrl.toString();
     }
 
     @Override

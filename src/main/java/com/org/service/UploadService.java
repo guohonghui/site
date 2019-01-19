@@ -36,13 +36,6 @@ public interface UploadService {
      String uploadLocalImg(String localPath);
 
     /**
-     * 上传base64格式的文件
-     * @param base64 文件的base64编码
-     * @return
-     */
-     String uploadBase64(String base64);
-
-    /**
      * 上传测试
      * @return
      */

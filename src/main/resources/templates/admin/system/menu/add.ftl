@@ -51,13 +51,6 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">菜单背景色</label>
-        <div class="layui-input-block">
-            <input type="hidden" class="layui-input" name="bgColor" >
-            <div class="color-box"></div>
-        </div>
-    </div>
-    <div class="layui-form-item">
         <label class="layui-form-label">菜单地址</label>
         <div class="layui-input-block">
             <input type="text" class="layui-input" name="href"  placeholder="请输入菜单地址">
@@ -67,18 +60,6 @@
         <label class="layui-form-label">菜单权限</label>
         <div class="layui-input-block">
             <input type="text" class="layui-input" name="permission"  placeholder="菜单权限">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">菜单图标</label>
-        <div class="layui-input-block">
-            <input type="hidden" class="layui-input" name="icon" id="iconValue"  placeholder="请选择菜单图标">
-            <div class="layui-input-inline" style="width: 100px;">
-                <i class="layui-icon" id="realIcon" style="display: none;font-size: 50px"></i>
-            </div>
-            <div class="layui-input-inline" style="width: 100px;">
-                <a class="layui-btn layui-btn-normal" id="selectIcon">我来选择一个图标</a>
-            </div>
         </div>
     </div>
     <div class="layui-form-item">
@@ -105,28 +86,6 @@
        var form = layui.form,
            layer = layui.layer;
         $    = layui.jquery;
-
-        $('.color-box').colpick({
-            colorScheme:'dark',
-            layout:'rgbhex',
-            color:'ff8800',
-            onSubmit:function(hsb,hex,rgb,el) {
-                $(el).css('background-color', '#'+hex);
-                $(el).colpickHide();
-                $("input[name='bgColor']").val("#"+hex);
-            }
-        }).css('background-color', '#ff8800');
-
-        //选择图标
-        $("#selectIcon").on("click",function () {
-            iconShow =layer.open({
-                type: 2,
-                title: '选择图标',
-                shadeClose: true,
-                content: '${base}/static/page/icon.html'
-            });
-            layer.full(iconShow);
-        });
 
         form.on("submit(addUser)",function(data){
             //判断左侧是否显示

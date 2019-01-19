@@ -42,13 +42,6 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">菜单背景色</label>
-        <div class="layui-input-block">
-            <input type="hidden" class="layui-input" name="bgColor" value="${menu.bgColor}">
-            <div class="color-box"></div>
-        </div>
-    </div>
-    <div class="layui-form-item">
         <label class="layui-form-label">菜单地址</label>
         <div class="layui-input-block">
             <input type="text" class="layui-input" name="href" value="${menu.href}"  placeholder="请输入菜单地址">
@@ -58,18 +51,6 @@
         <label class="layui-form-label">菜单权限</label>
         <div class="layui-input-block">
             <input type="text" class="layui-input" name="permission" value="${menu.permission}"  placeholder="菜单权限">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">菜单图标</label>
-        <div class="layui-input-block">
-            <input type="hidden" class="layui-input" name="icon" id="iconValue" value="${menu.icon}"  placeholder="请选择菜单图标">
-            <div class="layui-input-inline" style="width: 100px;">
-                <i class="layui-icon" id="realIcon" style="<#if (menu.icon == null || menu.icon == '')>display: none;</#if>font-size: 50px"><#if (menu.icon)??>${menu.icon}</#if></i>
-            </div>
-            <div class="layui-input-inline" style="width: 100px;">
-                <a class="layui-btn layui-btn-normal" id="selectIcon">我来选择一个图标</a>
-            </div>
         </div>
     </div>
     <div class="layui-form-item">
@@ -102,32 +83,6 @@
         var form = layui.form,
                 layer = layui.layer;
         $    = layui.jquery;
-        <#assign color = "">
-        <#if (menu.bgColor != null && menu.bgColor !="")>
-            <#assign color = menu.bgColor?substring(1)>
-        <#else>
-            <#assign color = "ff8800">
-        </#if>
-        $('.color-box').colpick({
-            colorScheme:'dark',
-            layout:'rgbhex',
-            color:'${color}',
-            onSubmit:function(hsb,hex,rgb,el) {
-                $(el).css('background-color', '#'+hex);
-                $(el).colpickHide();
-                $("input[name='bgColor']").val("#"+hex);
-            }
-        }).css('background-color', '#${color}');
-
-        $("#selectIcon").on("click",function () {
-            iconShow =layer.open({
-                type: 2,
-                title: '选择图标',
-                shadeClose: true,
-                content: '${base}/static/page/icon.html'
-            });
-            layer.full(iconShow);
-        });
 
         form.on("submit(addUser)",function(data){
             if(data.field.id == null){

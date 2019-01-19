@@ -1,8 +1,8 @@
 package com.org.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.org.base.MySysUser;
 import com.org.entity.Log;
+import com.org.utils.ShiroUtils;
 import com.org.utils.ToolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -90,8 +90,8 @@ public class WebLogAspect {
             sysLog.setIsp(map.get("isp"));
         }
         sysLog.setType(ToolUtil.isAjax(request)?"Ajax请求":"普通请求");
-        if(MySysUser.ShiroUser() != null) {
-            sysLog.setUsername(StringUtils.isNotBlank(MySysUser.nickName()) ? MySysUser.nickName() : MySysUser.loginName());
+        if(ShiroUtils.ShiroUser() != null) {
+            sysLog.setUsername(StringUtils.isNotBlank(ShiroUtils.nickName()) ? ShiroUtils.nickName() : ShiroUtils.loginName());
         }
     }
 
@@ -109,8 +109,8 @@ public class WebLogAspect {
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) {
-        if(MySysUser.ShiroUser() != null) {
-            sysLog.setUsername(StringUtils.isNotBlank(MySysUser.nickName()) ? MySysUser.nickName() : MySysUser.loginName());
+        if(ShiroUtils.ShiroUser() != null) {
+            sysLog.setUsername(StringUtils.isNotBlank(ShiroUtils.nickName()) ? ShiroUtils.nickName() : ShiroUtils.loginName());
         }
         String retString = JSONObject.toJSONString(ret);
         sysLog.setResponse(retString.length()>5000?JSONObject.toJSONString("请求参数数据过长不与显示"):retString);

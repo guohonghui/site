@@ -8,8 +8,4 @@ import com.org.entity.Rescource;
  */
 public interface RescourceService extends IService<Rescource> {
 
-    int getCountByHash(String hash);
-
-    Rescource getRescourceByHash(String hash);
-
 }

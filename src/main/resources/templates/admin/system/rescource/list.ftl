@@ -19,19 +19,6 @@
     <div class="layui-field-box">
     <form class="layui-form">
         <div class="layui-inline" style="margin-left: 15px">
-            <label>资源来源:</label>
-            <div class="layui-input-inline">
-                <select name="s_source">
-                    <option value="">请选择资源来源</option>
-                    <@my type="sys_rescource_source">
-                        <#list result as r>
-                    <option value="${r.value}" >${r.label}</option>
-                        </#list>
-                    </@my>
-                </select>
-            </div>
-        </div>
-        <div class="layui-inline" style="margin-left: 15px">
             <label>资源类型:</label>
             <div class="layui-input-inline">
                 <input type="text" value="" name="s_type" placeholder="请输入类型(.jpg/.png)" class="layui-input search_input">
@@ -57,16 +44,6 @@
 </fieldset>
 <div class="layui-form users_list">
     <table class="layui-table" id="test" lay-filter="demo"></table>
-
-    <script type="text/html" id="source">
-        <@my type="sys_rescource_source">
-            <#list result as r>
-            {{#  if(d.source == '${r.value}'){ }}
-            <span>${r.label}</span>
-            {{#  } }}
-            </#list>
-        </@my>
-    </script>
     <script type="text/html" id="webUrl">
         {{# if(d.fileType.indexOf("gif")>=0 || d.fileType.indexOf("jpg")>=0  || d.fileType.indexOf("png")>=0 ){ }}
         <span class="layer-photos-demo" id="pic_{{d.id}}"><img src="{{ d.webUrl }}" layer-src="{{ d.webUrl }}" style="width: 40px" lay-event="showPic" ></span>
@@ -109,7 +86,6 @@
             cols: [[
                 {type:'checkbox'},
                 {field:'fileName', title: '文件名称'},
-                {field:'source',  title: '来源',templet:'#source'},
                 {field:'webUrl',     title: '地址',templet:'#webUrl'},
                 {field:'hash',       title: 'hash值'},
                 {field:'fileSize',    title: '文件大小'},

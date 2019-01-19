@@ -1,15 +1,11 @@
 package com.org.controller;
 
-import com.google.common.collect.Lists;
 import com.org.annotation.SysLog;
-import com.org.base.MySysUser;
-import com.org.config.MenuComparator;
-import com.org.entity.Menu;
 import com.org.entity.User;
 import com.org.service.UserService;
+import com.org.utils.ShiroUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * 系统页面配置
@@ -97,7 +91,7 @@ public class SystemController {
     @GetMapping("userinfo")
     @ApiOperation(value = "个人资料")
     public String toEditMyInfo(Model model){
-        Long userId = MySysUser.id();
+        Long userId = ShiroUtils.id();
         User user = userService.findUserById(userId);
         model.addAttribute("userinfo",user);
         model.addAttribute("userRole",user.getRoleLists());
@@ -125,7 +119,7 @@ public class SystemController {
     @GetMapping("admin/system/menu/list")
     @SysLog("跳转菜单列表")
     public String menuList(){
-        return "admin/system/menu/test";
+        return "admin/system/menu/list";
     }
 
 }

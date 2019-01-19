@@ -42,10 +42,6 @@ public class RescourceController {
         LayerData<Rescource> layerData = new LayerData<>();
         EntityWrapper<Rescource> wrapper = new EntityWrapper<>();
         if(!map.isEmpty()){
-            String type = (String) map.get("type");
-            if(StringUtils.isNotBlank(type)) {
-                wrapper.like("file_type", type);
-            }
             String hash = (String)map.get("hash");
             if(StringUtils.isNotBlank(hash)){
                 wrapper.eq("hash",hash);
@@ -80,9 +76,4 @@ public class RescourceController {
         return RestResponse.success();
     }
 
-    @GetMapping("test")
-    @SysLog("测试错误请求")
-    public String error() throws Exception {
-        throw new Exception("测试异常消息");
-    }
 }

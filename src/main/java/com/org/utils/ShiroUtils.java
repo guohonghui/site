@@ -1,4 +1,4 @@
-package com.org.base;
+package com.org.utils;
 
 import com.org.realm.AuthRealm.ShiroUser;
 import org.apache.shiro.SecurityUtils;
@@ -6,7 +6,7 @@ import org.apache.shiro.SecurityUtils;
 /**
  * Created by Simple on 2018-12-28 15:07:29.
  */
-public class MySysUser {
+public class ShiroUtils {
     /**
      * 取出Shiro中的当前用户LoginName.
      */

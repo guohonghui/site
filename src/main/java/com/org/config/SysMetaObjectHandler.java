@@ -1,7 +1,7 @@
 package com.org.config;
 
 import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
-import com.org.base.MySysUser;
+import com.org.utils.ShiroUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,16 +31,16 @@ public class SysMetaObjectHandler extends MetaObjectHandler {
             setFieldValByName("createDate", new Date(),metaObject);
         }
         if (null == createId) {
-            if(MySysUser.ShiroUser() != null) {
-                setFieldValByName("createId", MySysUser.id(), metaObject);
+            if(ShiroUtils.ShiroUser() != null) {
+                setFieldValByName("createId", ShiroUtils.id(), metaObject);
             }
         }
         if (null == updateDate) {
             setFieldValByName("updateDate", new Date(),metaObject);
         }
         if (null == updateId) {
-            if(MySysUser.ShiroUser() != null) {
-                setFieldValByName("updateId", MySysUser.id(), metaObject);
+            if(ShiroUtils.ShiroUser() != null) {
+                setFieldValByName("updateId", ShiroUtils.id(), metaObject);
             }
         }
     }
@@ -52,7 +52,7 @@ public class SysMetaObjectHandler extends MetaObjectHandler {
         setFieldValByName("updateDate",new Date(), metaObject);
         Object updateId = getFieldValByName("updateId",metaObject);
         if (null == updateId) {
-            setFieldValByName("updateId", MySysUser.id(), metaObject);
+            setFieldValByName("updateId", ShiroUtils.id(), metaObject);
         }
     }
 }

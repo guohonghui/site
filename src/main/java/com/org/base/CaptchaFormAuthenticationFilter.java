@@ -24,10 +24,7 @@ public class CaptchaFormAuthenticationFilter extends FormAuthenticationFilter {
      * @see FormAuthenticationFilter#onLoginSuccess(AuthenticationToken, Subject, ServletRequest, ServletResponse)
      */
     @Override
-    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,
-                                     ServletRequest request, ServletResponse response) throws Exception {
-        //issueSuccessRedirect(request, response);
-        //we handled the success redirect directly, prevent the chain from continuing:
+    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest)request;
         HttpServletResponse httpServletResponse = (HttpServletResponse)response;
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + this.getSuccessUrl());

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -13,8 +14,10 @@ import java.io.Serializable;
  * Entity支持类
  * @param <T>
  */
+@Data
 public abstract class BaseEntity<T extends Model> extends Model<T> {
 
+    @JsonSerialize(using=ToStringSerializer.class)
     @ApiModelProperty(value = "实体编号（唯一标识）")
     protected Long id;
 
@@ -30,15 +33,6 @@ public abstract class BaseEntity<T extends Model> extends Model<T> {
     @Override
     protected Serializable pkVal() {
         return this.id;
-    }
-
-    @JsonSerialize(using=ToStringSerializer.class)
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override
