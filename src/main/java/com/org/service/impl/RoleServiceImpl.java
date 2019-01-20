@@ -16,11 +16,10 @@ import java.util.Set;
  *  服务实现类
  */
 @Service
-@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleService {
 
-    @Transactional(readOnly = false, rollbackFor = Exception.class)
     @Override
+    @Transactional
     public Role saveRole(Role role) {
         baseMapper.insert(role);
         baseMapper.saveRoleMenus(role.getId(),role.getMenuSet());

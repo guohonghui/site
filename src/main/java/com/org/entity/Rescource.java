@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.org.base.DataEntity;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 /**
  * 系统资源
  */
-@Data
 @TableName("sys_rescource")
 public class Rescource extends DataEntity<Rescource> {
 
@@ -41,16 +39,72 @@ public class Rescource extends DataEntity<Rescource> {
 	@TableField("original_net_url")
 	private String originalNetUrl;
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getWebUrl() {
+		return webUrl;
+	}
+
+	public void setWebUrl(String webUrl) {
+		this.webUrl = webUrl;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public String getOriginalNetUrl() {
+		return originalNetUrl;
+	}
+
+	public void setOriginalNetUrl(String originalNetUrl) {
+		this.originalNetUrl = originalNetUrl;
+	}
+
 	@Override
 	public String toString() {
 		return "Rescource{" +
-			", fileName=" + fileName +
-			", source=" + source +
-			", webUrl=" + webUrl +
-			", hash=" + hash +
-			", fileSize=" + fileSize +
-			", fileType=" + fileType +
-			", originalNetUrl=" + originalNetUrl +
-			"}";
+				", fileName=" + fileName +
+				", source=" + source +
+				", webUrl=" + webUrl +
+				", hash=" + hash +
+				", fileSize=" + fileSize +
+				", fileType=" + fileType +
+				", originalNetUrl=" + originalNetUrl +
+				"}";
 	}
 }

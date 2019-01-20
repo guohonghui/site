@@ -100,7 +100,7 @@ public class RoleController {
     @ResponseBody
     @SysLog("保存新增角色数据")
     public RestResponse add(@RequestBody Role role){
-        if (!"超级管理员".equals(role.getName()) || !"管理员".equals(role.getName())){
+        if ("超级管理员".equals(role.getName()) || "管理员".equals(role.getName())){
             return RestResponse.failure("角色名称不允许非管理员设置"+role.getName()+"作为角色名称");
         }
         if(StringUtils.isBlank(role.getName())){

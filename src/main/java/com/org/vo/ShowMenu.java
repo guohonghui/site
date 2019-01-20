@@ -2,7 +2,6 @@ package com.org.vo;
 
 import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.List;
 /**
  * menuVo
  */
-@Data
 public class ShowMenu implements Serializable{
 
     private static final long serialVersionUID = -7714594080308108786L;
@@ -32,5 +30,53 @@ public class ShowMenu implements Serializable{
 
     @ApiModelProperty(value = "菜单")
     private List<ShowMenu> children = Lists.newArrayList();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public Boolean getSpread() {
+        return spread;
+    }
+
+    public void setSpread(Boolean spread) {
+        this.spread = spread;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<ShowMenu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<ShowMenu> children) {
+        this.children = children;
+    }
 
 }

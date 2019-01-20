@@ -5,12 +5,10 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.FieldStrategy;
 import com.org.base.TreeEntity;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 /**
  * 权限菜单
  */
-@Data
 @TableName("sys_menu")
 public class Menu extends TreeEntity<Menu> {
 
@@ -38,5 +36,58 @@ public class Menu extends TreeEntity<Menu> {
 	@TableField(exist = false)
 	@ApiModelProperty(value = "数量")
 	private Integer dataCount;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
+	}
+
+	public Boolean getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Boolean show) {
+		isShow = show;
+	}
+
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
+
+	public Integer getDataCount() {
+		return dataCount;
+	}
+
+	public void setDataCount(Integer dataCount) {
+		this.dataCount = dataCount;
+	}
 
 }
