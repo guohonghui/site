@@ -155,12 +155,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- MybatisPlus -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>2.2.0</version>
-        </dependency>
         <!-- Google jar -->
         <dependency>
             <groupId>com.google.guava</groupId>

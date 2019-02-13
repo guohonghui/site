@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.org.base.DataEntity;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.util.Set;
 
 /**
  * 角色
  */
+@Data
 @TableName("sys_role")
 public class Role extends DataEntity<Role> {
 
@@ -25,29 +27,5 @@ public class Role extends DataEntity<Role> {
 	@ApiModelProperty(value = "用户")
 	@TableField(exist = false)
 	private Set<User> userSet;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Set<Menu> getMenuSet() {
-		return menuSet;
-	}
-
-	public void setMenuSet(Set<Menu> menuSet) {
-		this.menuSet = menuSet;
-	}
-
-	public Set<User> getUserSet() {
-		return userSet;
-	}
-
-	public void setUserSet(Set<User> userSet) {
-		this.userSet = userSet;
-	}
 
 }

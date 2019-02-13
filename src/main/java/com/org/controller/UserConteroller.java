@@ -88,7 +88,7 @@ public class UserConteroller {
         if(user.getRoleLists() == null || user.getRoleLists().size() == 0){
             return  RestResponse.failure("用户角色至少选择一个");
         }
-        if (!"root".equals(user.getLoginName()) || !"admin".equals(user.getLoginName())){
+        if ("root".equals(user.getLoginName()) || "admin".equals(user.getLoginName())){
             return RestResponse.failure("不允许非管理员用户使用"+user.getLoginName()+"登录名");
         }
         if(userService.userCount(user.getLoginName())>0){
