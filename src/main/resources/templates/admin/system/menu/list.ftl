@@ -48,6 +48,15 @@
                 }
             },
             {
+                name: '菜单权限',
+                headerClass: 'value_col',
+                colClass: 'value_col',
+                style: 'width: 15%',
+                render:function(row){
+                    return undefined === row.permission?"" : row.permission;
+                }
+            },
+            {
                 name: '排序',
                 headerClass: 'value_col',
                 colClass: 'value_col',

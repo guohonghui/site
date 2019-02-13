@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Simple on 2018/12/2.
@@ -109,6 +106,9 @@ public class RoleController {
         if(roleService.getRoleNameCount(role.getName())>0){
             return RestResponse.failure("角色名称已存在");
         }
+        if (role.getMenuSet() == null || role.getMenuSet().size() == 0){
+            return RestResponse.failure("角色权限不能为空，请分配角色权限！");
+        }
         roleService.saveRole(role);
         return RestResponse.success();
     }
@@ -116,12 +116,22 @@ public class RoleController {
     @GetMapping("edit")
     public String edit(Long id,Model model){
         Role role = roleService.getRoleById(id);
-        StringBuilder menuIds = new StringBuilder();
+        /**
+         * 改变用户角色传输到前台使用数组，而非字符串解决时间：2019-2-13 14:16:23 author： Guohonghui
+         * 解决由 StringBuilder menuIds = new StringBuilder();改为 List<Long> menuIds = new ArrayList<>();
+         */
+        //StringBuilder menuIds = new StringBuilder();
+        List<Long> menuIds = new ArrayList<>();
         if(role != null) {
             Set<Menu> menuSet = role.getMenuSet();
             if (menuSet != null && menuSet.size() > 0) {
                 for (Menu m : menuSet) {
-                    menuIds.append(m.getId().toString()).append(",");
+                    /**
+                     * 改变用户角色传输到前台使用数组，而非字符串解决时间：2019-2-13 14:16:23 author： Guohonghui
+                     * 解决由 menuIds.append(m.getId().toString()).append(",");改为 menuIds.add(m.getId());
+                     */
+                    //menuIds.append(m.getId().toString()).append(",");
+                    menuIds.add(m.getId());
                 }
             }
         }
@@ -131,7 +141,12 @@ public class RoleController {
         List<Menu> menuList = menuService.selectAllMenus(map);
         model.addAttribute("role",role);
         model.addAttribute("menuList",menuList);
-        model.addAttribute("menuIds",menuIds.toString());
+        /**
+         * 改变用户角色传输到前台使用数组，而非字符串解决时间：2019-2-13 14:16:23 author： Guohonghui
+         * 解决由 model.addAttribute("menuIds",menuIds.toString());改为 model.addAttribute("menuIds",menuIds);
+         */
+        //model.addAttribute("menuIds",menuIds.toString());
+        model.addAttribute("menuIds",menuIds);
         return "admin/system/role/edit";
     }
 
@@ -140,6 +155,10 @@ public class RoleController {
     @ResponseBody
     @SysLog("保存编辑角色数据")
     public RestResponse edit(@RequestBody Role role){
+        if (role.getMenuSet() == null || role.getMenuSet().size() == 0){
+            return RestResponse.failure("角色权限不能为空，请分配角色权限！");
+        }
+
         if(role.getId() == null || role.getId() == 0){
             return RestResponse.failure("角色ID不能为空");
         }
